@@ -43,6 +43,6 @@ public class UnaryCalculator {
 
     private double round(double value) {
         int accuracyCoefficient = (int) Math.pow(10, roundingAccuracy);
-        return Math.round(value * accuracyCoefficient) / accuracyCoefficient;
+        return (double) Math.round(value * accuracyCoefficient) / accuracyCoefficient;
     }
 }
