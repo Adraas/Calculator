@@ -5,7 +5,7 @@ public class UnaryCalculator {
     private int roundingAccuracy;
 
     public UnaryCalculator(int roundingAccuracy) {
-        this.roundingAccuracy = roundingAccuracy;
+        setRoundingAccuracy(roundingAccuracy);
     }
 
     public int getRoundingAccuracy() {
@@ -13,6 +13,11 @@ public class UnaryCalculator {
     }
 
     public void setRoundingAccuracy(int roundingAccuracy) {
+        if (roundingAccuracy <= 0) {
+            throw new NumberFormatException("Value of the rounding accuracy is incorrect: "
+                    .concat(String.valueOf(roundingAccuracy).concat(";\n"))
+                    .concat("Expected value > 0."));
+        }
         this.roundingAccuracy = roundingAccuracy;
     }
 
