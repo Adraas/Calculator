@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.wkn</groupId>
-    <artifactId>distributions</artifactId>
+    <artifactId>calculator</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
-    <name>Distributions</name>
+    <name>Calculator</name>
 
     <developers>
         <developer>
