@@ -5,6 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import ru.wkn.controller.Controller;
+import ru.wkn.model.UnaryCalculatorExpressionChecker;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UnaryCalculatorController implements Controller {
 
@@ -47,58 +51,34 @@ public class UnaryCalculatorController implements Controller {
     @FXML
     private Button buttonSqrt;
 
+    private UnaryCalculatorExpressionChecker unaryCalculatorExpressionChecker;
+    private Map<String, Button> stringButtonMap;
+
+    public void initialize() {
+        unaryCalculatorExpressionChecker = new UnaryCalculatorExpressionChecker();
+        stringButtonMap = new HashMap<>();
+
+        stringButtonMap.put("0", buttonValue0);
+        stringButtonMap.put("1", buttonValue1);
+        stringButtonMap.put("2", buttonValue2);
+        stringButtonMap.put("3", buttonValue3);
+        stringButtonMap.put("4", buttonValue4);
+        stringButtonMap.put("5", buttonValue5);
+        stringButtonMap.put("6", buttonValue6);
+        stringButtonMap.put("7", buttonValue7);
+        stringButtonMap.put("8", buttonValue8);
+        stringButtonMap.put("9", buttonValue9);
+        stringButtonMap.put(".", buttonDot);
+        stringButtonMap.put("+", buttonPlus);
+        stringButtonMap.put("-", buttonMinus);
+        stringButtonMap.put("*", buttonMultiply);
+        stringButtonMap.put("/", buttonDiv);
+        stringButtonMap.put("=", buttonEqually);
+    }
+
     @FXML
     private void onActionTextField(ActionEvent actionEvent) {
-        switch (((Button) actionEvent.getSource()).getText()) {
-            case "0":
-                buttonValue0.fire();
-                break;
-            case "1":
-                buttonValue1.fire();
-                break;
-            case "2":
-                buttonValue2.fire();
-                break;
-            case "3":
-                buttonValue3.fire();
-                break;
-            case "4":
-                buttonValue4.fire();
-                break;
-            case "5":
-                buttonValue5.fire();
-                break;
-            case "6":
-                buttonValue6.fire();
-                break;
-            case "7":
-                buttonValue7.fire();
-                break;
-            case "8":
-                buttonValue8.fire();
-                break;
-            case "9":
-                buttonValue9.fire();
-                break;
-            case ".":
-                buttonDot.fire();
-                break;
-            case "+":
-                buttonPlus.fire();
-                break;
-            case "-":
-                buttonMinus.fire();
-                break;
-            case "*":
-                buttonMultiply.fire();
-                break;
-            case "/":
-                buttonDiv.fire();
-                break;
-            case "=":
-                buttonEqually.fire();
-                break;
-        }
+        stringButtonMap.get(((Button) actionEvent.getSource()).getText()).fire();
     }
 
     @FXML
