@@ -11,7 +11,7 @@ import java.io.IOException;
 public class UnaryCalculatorWindow implements Window {
 
     @Override
-    public void windowInit(String windowName, double height, double width) throws IOException {
+    public void windowInit(String windowName, double width, double height) throws IOException {
         AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/fxml/unary-calculator-window.fxml"));
         Stage stage = new Stage();
 
