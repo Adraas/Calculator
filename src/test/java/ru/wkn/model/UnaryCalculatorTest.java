@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class UnaryCalculatorTest {
 
@@ -16,9 +17,9 @@ public class UnaryCalculatorTest {
 
     @Test
     public void testRoundedSumOperation() {
-        double firstAddend = 4.385954;
-        double secondAddend = 3.346;
-        assertEquals(Double.valueOf(unaryCalculator.sum(firstAddend, secondAddend)), Double.valueOf(7.732));
+        assertEquals(Double.valueOf(unaryCalculator.sum(4.385954, 3.346)), Double.valueOf(7.732));
+        assertNotEquals(unaryCalculator.sum(4.385954, 3.346), 7.731954);
+        assertEquals(Double.valueOf(unaryCalculator.sum(4.3333, 3.1111)), Double.valueOf(7.444));
     }
 
     @Test(expected = NumberFormatException.class)
