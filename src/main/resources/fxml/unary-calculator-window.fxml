@@ -24,8 +24,8 @@
                 <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
-                <TextField editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                           minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="0">
+                <TextField fx:id="textFieldResult" editable="false" maxHeight="-Infinity" maxWidth="-Infinity"
+                           minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="0">
                     <font>
                         <Font size="36.0"/>
                     </font>
