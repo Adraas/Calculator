@@ -17,7 +17,7 @@ public class Launcher extends Application {
     public void start(Stage primaryStage) {
         Window window = new UnaryCalculatorWindow();
         try {
-            window.windowInit("Unary calculator", 430, 545);
+            window.windowInit("Unary calculator", 430, 645);
         } catch (IOException e) {
             e.printStackTrace();
         }

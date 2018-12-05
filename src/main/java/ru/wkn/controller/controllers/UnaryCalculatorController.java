@@ -3,6 +3,7 @@ package ru.wkn.controller.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import ru.wkn.controller.Controller;
 import ru.wkn.model.CalculatorExpressionCompiler;
@@ -13,12 +14,13 @@ import java.util.Map;
 
 public class UnaryCalculatorController implements Controller {
 
+
+    @FXML
+    private Button buttonPower;
     @FXML
     private TextField textFieldResult;
     @FXML
     private Button buttonAC;
-    @FXML
-    private Button buttonEqually;
     @FXML
     private Button buttonValue1;
     @FXML
@@ -49,16 +51,23 @@ public class UnaryCalculatorController implements Controller {
     private Button buttonMultiply;
     @FXML
     private Button buttonDiv;
+    @FXML
+    private Slider sliderAccuracy;
+    @FXML
+    private Button buttonEqually;
 
     private Calculator calculator;
     private CalculatorExpressionCompiler calculatorExpressionCompiler;
     private Map<String, Button> stringButtonMap;
 
     public void initialize() {
-        calculator = new Calculator(Integer.SIZE);
+        calculator = new Calculator((int) sliderAccuracy.getValue());
         calculatorExpressionCompiler = new CalculatorExpressionCompiler(calculator);
         stringButtonMap = new HashMap<>();
+        stringButtonMapInit();
+    }
 
+    private void stringButtonMapInit() {
         stringButtonMap.put("0", buttonValue0);
         stringButtonMap.put("1", buttonValue1);
         stringButtonMap.put("2", buttonValue2);
@@ -74,6 +83,7 @@ public class UnaryCalculatorController implements Controller {
         stringButtonMap.put("-", buttonMinus);
         stringButtonMap.put("*", buttonMultiply);
         stringButtonMap.put("/", buttonDiv);
+        stringButtonMap.put("^", buttonPower);
         stringButtonMap.put("=", buttonEqually);
     }
 
@@ -86,11 +96,6 @@ public class UnaryCalculatorController implements Controller {
     private void onActionButtonAC() {
         textFieldResult.setText("0");
         calculatorExpressionCompiler.allClear();
-    }
-
-    @FXML
-    private void onActionButtonEqually() {
-        textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('='));
     }
 
     @FXML
@@ -164,12 +169,22 @@ public class UnaryCalculatorController implements Controller {
     }
 
     @FXML
+    private void onActionButtonSqrt() {
+        textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('√'));
+    }
+
+    @FXML
     private void onActionButtonDiv() {
         textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('/'));
     }
 
     @FXML
-    private void onActionButtonSqrt() {
-        textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('√'));
+    private void onActionButtonPower() {
+        textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('^'));
+    }
+
+    @FXML
+    private void onActionButtonEqually() {
+        textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('='));
     }
 }
