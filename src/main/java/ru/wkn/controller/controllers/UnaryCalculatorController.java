@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import ru.wkn.controller.Controller;
-import ru.wkn.model.UnaryCalculatorExpressionChecker;
+import ru.wkn.model.CalculatorExpressionCompiler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,14 +48,12 @@ public class UnaryCalculatorController implements Controller {
     private Button buttonMultiply;
     @FXML
     private Button buttonDiv;
-    @FXML
-    private Button buttonSqrt;
 
-    private UnaryCalculatorExpressionChecker unaryCalculatorExpressionChecker;
+    private CalculatorExpressionCompiler calculatorExpressionCompiler;
     private Map<String, Button> stringButtonMap;
 
     public void initialize() {
-        unaryCalculatorExpressionChecker = new UnaryCalculatorExpressionChecker();
+        calculatorExpressionCompiler = new CalculatorExpressionCompiler();
         stringButtonMap = new HashMap<>();
 
         stringButtonMap.put("0", buttonValue0);
@@ -83,73 +81,109 @@ public class UnaryCalculatorController implements Controller {
 
     @FXML
     private void onActionButtonAC() {
+        textFieldResult.clear();
+        calculatorExpressionCompiler.allClear();
     }
 
     @FXML
     private void onActionButtonEqually() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('=')));
     }
 
     @FXML
     private void onActionButtonValue1() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('1')));
     }
 
     @FXML
     private void onActionButtonValue2() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('2')));
     }
 
     @FXML
     private void onActionButtonValue3() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('3')));
     }
 
     @FXML
     private void onActionButtonValue4() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('4')));
     }
 
     @FXML
     private void onActionButtonValue5() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('5')));
     }
 
     @FXML
     private void onActionButtonValue6() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('6')));
     }
 
     @FXML
     private void onActionButtonValue7() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('7')));
     }
 
     @FXML
     private void onActionButtonValue8() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('8')));
     }
 
     @FXML
     private void onActionButtonValue9() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('9')));
     }
 
     @FXML
     private void onActionButtonValue0() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('0')));
     }
 
     @FXML
     private void onActionButtonDot() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('.')));
     }
 
     @FXML
     private void onActionButtonPlus() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('+')));
     }
 
     @FXML
     private void onActionButtonMinus() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('-')));
     }
 
     @FXML
     private void onActionButtonMultiply() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('*')));
     }
 
     @FXML
     private void onActionButtonDiv() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('/')));
     }
 
     @FXML
     private void onActionButtonSqrt() {
+        textFieldResult.clear();
+        textFieldResult.setText(String.valueOf(calculatorExpressionCompiler.getCurrentAnswer('√')));
     }
 }

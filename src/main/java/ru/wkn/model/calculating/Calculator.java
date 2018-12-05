@@ -1,10 +1,10 @@
-package ru.wkn.model;
+package ru.wkn.model.calculating;
 
-public class UnaryCalculator {
+public class Calculator {
 
     private int roundingAccuracy;
 
-    public UnaryCalculator(int roundingAccuracy) {
+    public Calculator(int roundingAccuracy) {
         setRoundingAccuracy(roundingAccuracy);
     }
 

@@ -170,7 +170,7 @@
                         <Font size="36.0"/>
                     </font>
                 </Button>
-                <Button fx:id="buttonSqrt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                         minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionButtonSqrt" prefHeight="100.0"
                         prefWidth="100.0" text="√" GridPane.columnIndex="2" GridPane.rowIndex="3">
                     <font>
