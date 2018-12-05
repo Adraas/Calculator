@@ -47,7 +47,7 @@ public class StringExpression {
                     operationAnswerAsString = String.valueOf(calculator.division(firstOperand, secondOperand));
                     break;
                 case "√":
-                    operationAnswerAsString = String.valueOf(calculator.squareRoot(firstOperand));
+                    operationAnswerAsString = String.valueOf(calculator.squareRoot(firstOperand, secondOperand));
                     break;
             }
         }

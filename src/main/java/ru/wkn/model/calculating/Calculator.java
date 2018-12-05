@@ -37,8 +37,8 @@ public class Calculator {
         return round(dividend / divisor);
     }
 
-    public double squareRoot(double value) {
-        return round(Math.sqrt(value));
+    public double squareRoot(double value, double power) {
+        return round(Math.pow(value, 1 / power));
     }
 
     private double round(double value) {
