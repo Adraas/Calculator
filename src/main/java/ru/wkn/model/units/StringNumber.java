@@ -44,8 +44,7 @@ public class StringNumber {
         return isIntegerValue;
     }
 
-    @Override
-    public String toString() {
+    public String getNumberAsString() {
         String numberAsString = integerPart.equals("") ? "0" : integerPart;
         if (dotEntered) {
             if (fractionalPartEntered) {

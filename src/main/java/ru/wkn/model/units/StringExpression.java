@@ -28,11 +28,10 @@ public class StringExpression {
         this.operator = operator;
     }
 
-    @Override
-    public String toString() {
+    public String getAnswerAsString() {
         String operationAnswerAsString = "0";
-        double firstOperand = Double.parseDouble(this.firstOperand.toString());
-        double secondOperand = Double.parseDouble(this.secondOperand.toString());
+        double firstOperand = Double.parseDouble(this.firstOperand.getNumberAsString());
+        double secondOperand = Double.parseDouble(this.secondOperand.getNumberAsString());
         if (operator != null) {
             switch (operator) {
                 case "+":
