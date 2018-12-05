@@ -47,9 +47,11 @@ public class CalculatorExpressionCompiler {
             if (inputSymbol == '.') {
                 if (!operatorEntered) {
                     previousOperand.inputDot();
+                    firstInput = false;
                     return previousOperand.getNumberAsString();
                 } else {
                     currentOperand.inputDot();
+                    firstInput = false;
                     return currentOperand.getNumberAsString();
                 }
             } else {
