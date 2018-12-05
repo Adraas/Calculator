@@ -1,33 +1,57 @@
 package ru.wkn.model;
 
+import ru.wkn.model.calculating.Calculator;
+import ru.wkn.model.units.StringExpression;
+import ru.wkn.model.units.StringNumber;
+
 public class CalculatorExpressionCompiler {
 
-    private double previousOperand;
-    private double currentOperand;
+    private StringNumber previousOperand;
+    private StringNumber currentOperand;
+    private StringExpression stringExpression;
+    private Calculator calculator;
     private boolean firstInput;
     private boolean operatorEntered;
     private String currentOperator;
 
-    public CalculatorExpressionCompiler() {
+    public CalculatorExpressionCompiler(Calculator calculator) {
+        this.calculator = calculator;
         allClear();
     }
 
-    public double getCurrentAnswer(char inputSymbol) {
+    public String getCurrentAnswerAsString(char inputSymbol) {
         if (Character.isDigit(inputSymbol)) {
             if (firstInput) {
-                previousOperand = Double.parseDouble(String.valueOf(inputSymbol));
+                previousOperand.addToIntegerPart(inputSymbol);
                 firstInput = false;
+                return previousOperand.getNumberAsString();
             } else {
                 if (operatorEntered) {
-                    currentOperand = Double.parseDouble(String.valueOf(inputSymbol));
+                    if (!currentOperand.isDotEntered()) {
+                        currentOperand.addToIntegerPart(inputSymbol);
+                    } else {
+                        currentOperand.addToFractionalPart(inputSymbol);
+                    }
                     operatorEntered = false;
+                    return currentOperand.getNumberAsString();
                 } else {
-                    previousOperand = Double.parseDouble(String.valueOf(previousOperand)
-                            .concat(String.valueOf(inputSymbol)));
+                    if (!previousOperand.isDotEntered()) {
+                        previousOperand.addToIntegerPart(inputSymbol);
+                    } else {
+                        previousOperand.addToFractionalPart(inputSymbol);
+                    }
+                    return previousOperand.getNumberAsString();
                 }
             }
         } else {
             if (inputSymbol == '.') {
+                if (!operatorEntered) {
+                    previousOperand.inputDot();
+                    return previousOperand.getNumberAsString();
+                } else {
+                    currentOperand.inputDot();
+                    return currentOperand.getNumberAsString();
+                }
             } else {
                 if (!operatorEntered) {
                     switch (inputSymbol) {
@@ -53,12 +77,13 @@ public class CalculatorExpressionCompiler {
                 }
             }
         }
-        return 0;
+        return "0";
     }
 
     public void allClear() {
-        previousOperand = 0;
-        currentOperand = 0;
+        previousOperand = new StringNumber();
+        currentOperand = new StringNumber();
+        stringExpression = new StringExpression(calculator);
         firstInput = true;
         operatorEntered = false;
         currentOperator = null;

@@ -44,6 +44,14 @@ public class StringNumber {
         return isIntegerValue;
     }
 
+    public void setValueByString(String newValue) {
+        String[] valueAsStringArray = newValue.split(".");
+        integerPart = valueAsStringArray[0];
+        if (valueAsStringArray.length > 1) {
+            fractionalPart = valueAsStringArray[1];
+        }
+    }
+
     public String getNumberAsString() {
         String numberAsString = integerPart.equals("") ? "0" : integerPart;
         if (dotEntered) {
