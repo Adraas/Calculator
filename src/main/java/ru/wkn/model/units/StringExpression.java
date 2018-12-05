@@ -28,7 +28,8 @@ public class StringExpression {
         this.operator = operator;
     }
 
-    public String getOperationAnswer() {
+    @Override
+    public String toString() {
         String operationAnswerAsString = "0";
         double firstOperand = Double.parseDouble(this.firstOperand.toString());
         double secondOperand = Double.parseDouble(this.secondOperand.toString());
