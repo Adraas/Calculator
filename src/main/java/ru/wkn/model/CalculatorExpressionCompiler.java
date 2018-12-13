@@ -19,7 +19,7 @@ public class CalculatorExpressionCompiler {
         allClear();
     }
 
-    public String getCurrentAnswerAsString(char inputSymbol) {
+    public String getCurrentAnswerAsString(char inputSymbol) throws ArithmeticException {
         if (Character.isDigit(inputSymbol)) {
             if (firstInput) {
                 previousOperand.addToIntegerPart(inputSymbol);
@@ -70,6 +70,9 @@ public class CalculatorExpressionCompiler {
                             break;
                         }
                         case '√': {
+                            break;
+                        }
+                        case '^': {
                             break;
                         }
                         case '=': {

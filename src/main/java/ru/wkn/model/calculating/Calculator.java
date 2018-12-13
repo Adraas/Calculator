@@ -33,12 +33,16 @@ public class Calculator {
         return round(firstMultiplier * secondMultiplier);
     }
 
-    public double division(double dividend, double divisor) {
+    public double division(double dividend, double divisor) throws ArithmeticException {
         return round(dividend / divisor);
     }
 
-    public double squareRoot(double value, double power) {
+    public double squareRoot(double value, double power) throws ArithmeticException {
         return round(Math.pow(value, 1 / power));
+    }
+
+    public double power(double value, double degree) throws ArithmeticException {
+        return round(Math.pow(value, degree));
     }
 
     private double round(double value) {
