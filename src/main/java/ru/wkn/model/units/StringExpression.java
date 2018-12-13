@@ -6,13 +6,12 @@ public class StringExpression {
 
     private StringNumber firstOperand;
     private StringNumber secondOperand;
-    private String operator;
+    private char operator;
     private Calculator calculator;
 
     public StringExpression(Calculator calculator) {
         firstOperand = new StringNumber();
         secondOperand = new StringNumber();
-        operator = null;
         this.calculator = calculator;
     }
 
@@ -24,37 +23,37 @@ public class StringExpression {
         this.secondOperand = secondOperand;
     }
 
-    public void setOperator(String operator) {
+    public void setOperator(char operator) {
         this.operator = operator;
     }
 
     public String getAnswerAsString() throws ArithmeticException {
-        String operationAnswerAsString = "0";
+        String operationAnswerAsString = firstOperand.getNumberAsString();
         double firstOperand = Double.parseDouble(this.firstOperand.getNumberAsString());
         double secondOperand = Double.parseDouble(this.secondOperand.getNumberAsString());
-        if (operator != null) {
+        if (operator != 0) {
             switch (operator) {
-                case "+": {
+                case '+': {
                     operationAnswerAsString = String.valueOf(calculator.sum(firstOperand, secondOperand));
                     break;
                 }
-                case "-": {
+                case '-': {
                     operationAnswerAsString = String.valueOf(calculator.subtract(firstOperand, secondOperand));
                     break;
                 }
-                case "*": {
+                case '*': {
                     operationAnswerAsString = String.valueOf(calculator.multiply(firstOperand, secondOperand));
                     break;
                 }
-                case "/": {
+                case '/': {
                     operationAnswerAsString = String.valueOf(calculator.division(firstOperand, secondOperand));
                     break;
                 }
-                case "√": {
+                case '√': {
                     operationAnswerAsString = String.valueOf(calculator.squareRoot(firstOperand, secondOperand));
                     break;
                 }
-                case "^": {
+                case '^': {
                     operationAnswerAsString = String.valueOf(calculator.power(firstOperand, secondOperand));
                     break;
                 }

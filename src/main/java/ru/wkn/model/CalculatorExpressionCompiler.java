@@ -6,13 +6,13 @@ import ru.wkn.model.units.StringNumber;
 
 public class CalculatorExpressionCompiler {
 
-    private StringNumber previousOperand;
-    private StringNumber currentOperand;
+    private StringNumber firstOperand;
+    private StringNumber secondOperand;
     private StringExpression stringExpression;
     private Calculator calculator;
     private boolean firstInput;
     private boolean operatorEntered;
-    private String currentOperator;
+    private char currentOperator;
 
     public CalculatorExpressionCompiler(Calculator calculator) {
         this.calculator = calculator;
@@ -22,76 +22,102 @@ public class CalculatorExpressionCompiler {
     public String getCurrentAnswerAsString(char inputSymbol) throws ArithmeticException {
         if (Character.isDigit(inputSymbol)) {
             if (firstInput) {
-                previousOperand.addToIntegerPart(inputSymbol);
+                firstOperand.addToIntegerPart(inputSymbol);
                 firstInput = false;
-                return previousOperand.getNumberAsString();
+                return firstOperand.getNumberAsString();
             } else {
                 if (operatorEntered) {
-                    if (!currentOperand.isDotEntered()) {
-                        currentOperand.addToIntegerPart(inputSymbol);
+                    if (!secondOperand.isDotEntered()) {
+                        secondOperand.addToIntegerPart(inputSymbol);
                     } else {
-                        currentOperand.addToFractionalPart(inputSymbol);
+                        secondOperand.addToFractionalPart(inputSymbol);
                     }
                     operatorEntered = false;
-                    return currentOperand.getNumberAsString();
+                    return secondOperand.getNumberAsString();
                 } else {
-                    if (!previousOperand.isDotEntered()) {
-                        previousOperand.addToIntegerPart(inputSymbol);
+                    if (!firstOperand.isDotEntered()) {
+                        firstOperand.addToIntegerPart(inputSymbol);
                     } else {
-                        previousOperand.addToFractionalPart(inputSymbol);
+                        firstOperand.addToFractionalPart(inputSymbol);
                     }
-                    return previousOperand.getNumberAsString();
+                    return firstOperand.getNumberAsString();
                 }
             }
         } else {
             if (inputSymbol == '.') {
                 if (!operatorEntered) {
-                    previousOperand.inputDot();
+                    firstOperand.inputDot();
                     firstInput = false;
-                    return previousOperand.getNumberAsString();
+                    return firstOperand.getNumberAsString();
                 } else {
-                    currentOperand.inputDot();
+                    secondOperand.inputDot();
                     firstInput = false;
-                    return currentOperand.getNumberAsString();
+                    return secondOperand.getNumberAsString();
                 }
             } else {
-                if (!operatorEntered) {
-                    switch (inputSymbol) {
-                        case '+': {
-                            break;
-                        }
-                        case '-': {
-                            break;
-                        }
-                        case '*': {
-                            break;
-                        }
-                        case '/': {
-                            break;
-                        }
-                        case '√': {
-                            break;
-                        }
-                        case '^': {
-                            break;
-                        }
-                        case '=': {
-                            break;
-                        }
+                switch (inputSymbol) {
+                    case '+': {
+                        currentOperator = inputSymbol;
+                        fillExpression();
+                        operatorEntered = true;
+                        return firstOperand.getNumberAsString();
+                    }
+                    case '-': {
+                        currentOperator = inputSymbol;
+                        fillExpression();
+                        operatorEntered = true;
+                        return firstOperand.getNumberAsString();
+                    }
+                    case '*': {
+                        currentOperator = inputSymbol;
+                        fillExpression();
+                        operatorEntered = true;
+                        return firstOperand.getNumberAsString();
+                    }
+                    case '/': {
+                        currentOperator = inputSymbol;
+                        fillExpression();
+                        operatorEntered = true;
+                        return firstOperand.getNumberAsString();
+                    }
+                    case '√': {
+                        currentOperator = inputSymbol;
+                        fillExpression();
+                        operatorEntered = true;
+                        return firstOperand.getNumberAsString();
+                    }
+                    case '^': {
+                        currentOperator = inputSymbol;
+                        fillExpression();
+                        operatorEntered = true;
+                        return firstOperand.getNumberAsString();
+                    }
+                    case '=': {
+                        operatorEntered = false;
+                        break;
                     }
                 }
             }
         }
-        return "0";
+        return stringExpression.getAnswerAsString();
+    }
+
+    private void fillExpression() {
+        stringExpression.setOperator(currentOperator);
+        if (!operatorEntered) {
+            stringExpression.setFirstOperand(firstOperand);
+        } else {
+            stringExpression.setSecondOperand(secondOperand);
+        }
     }
 
     public void allClear() {
-        previousOperand = new StringNumber();
-        currentOperand = new StringNumber();
+        firstOperand = new StringNumber();
+        secondOperand = new StringNumber();
         stringExpression = new StringExpression(calculator);
         firstInput = true;
         operatorEntered = false;
-        currentOperator = null;
+        currentOperator = 0;
     }
 
     public boolean isFirstInput() {
