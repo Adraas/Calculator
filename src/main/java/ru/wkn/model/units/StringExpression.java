@@ -62,12 +62,7 @@ public class StringExpression {
                 }
             }
         }
-        String[] operationAnswerAsStringArray = operationAnswerAsString.split("\\.");
-        if (operationAnswerAsStringArray.length > 0) {
-            if (Double.parseDouble(operationAnswerAsString) % Integer.parseInt(operationAnswerAsStringArray[0]) == 0) {
-                return operationAnswerAsStringArray[0];
-            }
-        }
-        return operationAnswerAsString;
+        StringNumber resultValue = new StringNumber(operationAnswerAsString);
+        return resultValue.getNumberAsString();
     }
 }

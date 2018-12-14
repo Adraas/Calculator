@@ -18,6 +18,10 @@ public class StringNumber {
         fractionalPartEntered = false;
     }
 
+    public StringNumber(String defaultValue) {
+        setValueByString(defaultValue);
+    }
+
     public void addToIntegerPart(char digit) {
         if (firstInput) {
             integerPart = String.valueOf(digit);
@@ -52,10 +56,14 @@ public class StringNumber {
     }
 
     public void setValueByString(String newValue) {
+        firstInput = false;
         String[] valueAsStringArray = newValue.split("\\.");
         integerPart = valueAsStringArray[0];
         if (valueAsStringArray.length > 1) {
             fractionalPart = valueAsStringArray[1];
+            fractionalPartEntered = true;
+            dotEntered = true;
+            isIntegerValue = false;
         }
     }
 
