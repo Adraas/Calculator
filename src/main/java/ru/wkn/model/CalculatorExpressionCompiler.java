@@ -20,67 +20,77 @@ public class CalculatorExpressionCompiler {
 
     public String getCurrentAnswerAsString(char inputSymbol) throws ArithmeticException {
         if (Character.isDigit(inputSymbol)) {
-            if (firstOperandInput) {
-                if (!firstOperand.isDotEntered()) {
-                    firstOperand.addToIntegerPart(inputSymbol);
-                } else {
-                    firstOperand.addToFractionalPart(inputSymbol);
-                }
-                return firstOperand.getNumberAsString();
-            }
-            if (!firstOperandInput) {
-                if (!secondOperand.isDotEntered()) {
-                    secondOperand.addToIntegerPart(inputSymbol);
-                } else {
-                    secondOperand.addToFractionalPart(inputSymbol);
-                }
-                return secondOperand.getNumberAsString();
-            }
+            return valueAfterAddingDigit(inputSymbol);
         }
         if (inputSymbol == '.') {
-            if (firstOperandInput) {
-                firstOperand.inputDot();
-                return firstOperand.getNumberAsString();
-            }
-            if (!firstOperandInput) {
-                secondOperand.inputDot();
-                return secondOperand.getNumberAsString();
-            }
+            return valueAfterInputDot();
         }
         if ("+-*/√^=".contains(String.valueOf(inputSymbol))) {
             currentOperator = inputSymbol;
-            switch (inputSymbol) {
-                case '+': {
-                    fillExpression();
-                    break;
-                }
-                case '-': {
-                    fillExpression();
-                    break;
-                }
-                case '*': {
-                    fillExpression();
-                    break;
-                }
-                case '/': {
-                    fillExpression();
-                    break;
-                }
-                case '√': {
-                    fillExpression();
-                    break;
-                }
-                case '^': {
-                    fillExpression();
-                    break;
-                }
-                case '=': {
-                    fillExpression();
-                    break;
-                }
-            }
+            inputOperator();
         }
         return stringExpression.getAnswerAsString();
+    }
+
+    private String valueAfterAddingDigit(char inputDigit) {
+        if (firstOperandInput) {
+            if (!firstOperand.isDotEntered()) {
+                firstOperand.addToIntegerPart(inputDigit);
+            } else {
+                firstOperand.addToFractionalPart(inputDigit);
+            }
+            return firstOperand.getNumberAsString();
+        } else {
+            if (!secondOperand.isDotEntered()) {
+                secondOperand.addToIntegerPart(inputDigit);
+            } else {
+                secondOperand.addToFractionalPart(inputDigit);
+            }
+            return secondOperand.getNumberAsString();
+        }
+    }
+
+    private String valueAfterInputDot() {
+        if (firstOperandInput) {
+            firstOperand.inputDot();
+            return firstOperand.getNumberAsString();
+        } else {
+            secondOperand.inputDot();
+            return secondOperand.getNumberAsString();
+        }
+    }
+
+    private void inputOperator() {
+        switch (currentOperator) {
+            case '+': {
+                fillExpression();
+                break;
+            }
+            case '-': {
+                fillExpression();
+                break;
+            }
+            case '*': {
+                fillExpression();
+                break;
+            }
+            case '/': {
+                fillExpression();
+                break;
+            }
+            case '√': {
+                fillExpression();
+                break;
+            }
+            case '^': {
+                fillExpression();
+                break;
+            }
+            case '=': {
+                fillExpression();
+                break;
+            }
+        }
     }
 
     private void fillExpression() {

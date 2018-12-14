@@ -48,7 +48,7 @@ public class StringNumber {
         firstInput = false;
         String[] valueAsStringArray = newValue.split("\\.");
         integerPart = valueAsStringArray[0];
-        if (valueAsStringArray.length > 1) {
+        if (valueAsStringArray.length == 2) {
             fractionalPart = valueAsStringArray[1];
             fractionalPartEntered = true;
             dotEntered = true;
@@ -57,10 +57,8 @@ public class StringNumber {
 
     public String getNumberAsString() {
         String numberAsString = integerPart.equals("") ? "0" : integerPart;
-        if (dotEntered) {
-            if (fractionalPartEntered) {
-                numberAsString = numberAsString.concat(".").concat(fractionalPart);
-            }
+        if (dotEntered && fractionalPartEntered) {
+            numberAsString = numberAsString.concat(".").concat(fractionalPart);
         }
         return numberAsString;
     }
