@@ -10,8 +10,7 @@ public class CalculatorExpressionCompiler {
     private StringNumber secondOperand;
     private StringExpression stringExpression;
     private Calculator calculator;
-    private boolean firstInput;
-    private boolean operatorEntered;
+    private boolean firstOperandInput;
     private char currentOperator;
 
     public CalculatorExpressionCompiler(Calculator calculator) {
@@ -21,79 +20,62 @@ public class CalculatorExpressionCompiler {
 
     public String getCurrentAnswerAsString(char inputSymbol) throws ArithmeticException {
         if (Character.isDigit(inputSymbol)) {
-            if (firstInput) {
-                firstOperand.addToIntegerPart(inputSymbol);
-                firstInput = false;
-                return firstOperand.getNumberAsString();
-            } else {
-                if (operatorEntered) {
-                    if (!secondOperand.isDotEntered()) {
-                        secondOperand.addToIntegerPart(inputSymbol);
-                    } else {
-                        secondOperand.addToFractionalPart(inputSymbol);
-                    }
-                    operatorEntered = false;
-                    return secondOperand.getNumberAsString();
+            if (firstOperandInput) {
+                if (!firstOperand.isDotEntered()) {
+                    firstOperand.addToIntegerPart(inputSymbol);
                 } else {
-                    if (!firstOperand.isDotEntered()) {
-                        firstOperand.addToIntegerPart(inputSymbol);
-                    } else {
-                        firstOperand.addToFractionalPart(inputSymbol);
-                    }
-                    return firstOperand.getNumberAsString();
+                    firstOperand.addToFractionalPart(inputSymbol);
                 }
+                return firstOperand.getNumberAsString();
+            }
+            if (!firstOperandInput) {
+                if (!secondOperand.isDotEntered()) {
+                    secondOperand.addToIntegerPart(inputSymbol);
+                } else {
+                    secondOperand.addToFractionalPart(inputSymbol);
+                }
+                return secondOperand.getNumberAsString();
             }
         } else {
             if (inputSymbol == '.') {
-                if (!operatorEntered) {
+                if (firstOperandInput) {
                     firstOperand.inputDot();
-                    firstInput = false;
                     return firstOperand.getNumberAsString();
-                } else {
+                }
+                if (!firstOperandInput) {
                     secondOperand.inputDot();
-                    firstInput = false;
                     return secondOperand.getNumberAsString();
                 }
-            } else {
+            }
+            if ("+-*/√^=".contains(String.valueOf(inputSymbol))) {
+                currentOperator = inputSymbol;
                 switch (inputSymbol) {
                     case '+': {
-                        currentOperator = inputSymbol;
                         fillExpression();
-                        operatorEntered = true;
-                        return firstOperand.getNumberAsString();
+                        break;
                     }
                     case '-': {
-                        currentOperator = inputSymbol;
                         fillExpression();
-                        operatorEntered = true;
-                        return firstOperand.getNumberAsString();
+                        break;
                     }
                     case '*': {
-                        currentOperator = inputSymbol;
                         fillExpression();
-                        operatorEntered = true;
-                        return firstOperand.getNumberAsString();
+                        break;
                     }
                     case '/': {
-                        currentOperator = inputSymbol;
                         fillExpression();
-                        operatorEntered = true;
-                        return firstOperand.getNumberAsString();
+                        break;
                     }
                     case '√': {
-                        currentOperator = inputSymbol;
                         fillExpression();
-                        operatorEntered = true;
-                        return firstOperand.getNumberAsString();
+                        break;
                     }
                     case '^': {
-                        currentOperator = inputSymbol;
                         fillExpression();
-                        operatorEntered = true;
-                        return firstOperand.getNumberAsString();
+                        break;
                     }
                     case '=': {
-                        operatorEntered = false;
+                        fillExpression();
                         break;
                     }
                 }
@@ -104,27 +86,19 @@ public class CalculatorExpressionCompiler {
 
     private void fillExpression() {
         stringExpression.setOperator(currentOperator);
-        if (!operatorEntered) {
+        if (firstOperandInput) {
             stringExpression.setFirstOperand(firstOperand);
         } else {
             stringExpression.setSecondOperand(secondOperand);
         }
+        firstOperandInput = false;
     }
 
     public void allClear() {
         firstOperand = new StringNumber();
         secondOperand = new StringNumber();
         stringExpression = new StringExpression(calculator);
-        firstInput = true;
-        operatorEntered = false;
+        firstOperandInput = true;
         currentOperator = 0;
-    }
-
-    public boolean isFirstInput() {
-        return firstInput;
-    }
-
-    public boolean isOperatorEntered() {
-        return operatorEntered;
     }
 }

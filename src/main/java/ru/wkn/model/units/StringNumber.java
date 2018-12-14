@@ -4,20 +4,27 @@ public class StringNumber {
 
     private String integerPart;
     private String fractionalPart;
+    private boolean firstInput;
     private boolean isIntegerValue;
     private boolean dotEntered;
     private boolean fractionalPartEntered;
 
     public StringNumber() {
-        integerPart = "";
+        integerPart = "0";
         fractionalPart = "";
+        firstInput = true;
         isIntegerValue = true;
         dotEntered = false;
         fractionalPartEntered = false;
     }
 
     public void addToIntegerPart(char digit) {
-        integerPart = integerPart.concat(String.valueOf(digit));
+        if (firstInput) {
+            integerPart = String.valueOf(digit);
+            firstInput = false;
+        } else {
+            integerPart = integerPart.concat(String.valueOf(digit));
+        }
     }
 
     public void addToFractionalPart(char digit) {
@@ -45,7 +52,7 @@ public class StringNumber {
     }
 
     public void setValueByString(String newValue) {
-        String[] valueAsStringArray = newValue.split(".");
+        String[] valueAsStringArray = newValue.split("\\.");
         integerPart = valueAsStringArray[0];
         if (valueAsStringArray.length > 1) {
             fractionalPart = valueAsStringArray[1];

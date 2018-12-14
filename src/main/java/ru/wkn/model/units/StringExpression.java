@@ -57,12 +57,17 @@ public class StringExpression {
                     operationAnswerAsString = String.valueOf(calculator.power(firstOperand, secondOperand));
                     break;
                 }
+                case '=': {
+                    operationAnswerAsString = this.firstOperand.getNumberAsString();
+                }
             }
         }
-        if (Double.parseDouble(operationAnswerAsString) % Integer.parseInt(operationAnswerAsString.split(".")[0]) == 0) {
-            return operationAnswerAsString.split(".")[0];
-        } else {
-            return operationAnswerAsString;
+        String[] operationAnswerAsStringArray = operationAnswerAsString.split("\\.");
+        if (operationAnswerAsStringArray.length > 0) {
+            if (Double.parseDouble(operationAnswerAsString) % Integer.parseInt(operationAnswerAsStringArray[0]) == 0) {
+                return operationAnswerAsStringArray[0];
+            }
         }
+        return operationAnswerAsString;
     }
 }
