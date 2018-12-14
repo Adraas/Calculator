@@ -187,4 +187,9 @@ public class UnaryCalculatorController implements Controller {
     private void onActionButtonEqually() {
         textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('='));
     }
+
+    @FXML
+    private void onMouseClickedAccuracy() {
+        calculator.setRoundingAccuracy((int) sliderAccuracy.getValue());
+    }
 }
