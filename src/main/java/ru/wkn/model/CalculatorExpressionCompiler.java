@@ -10,8 +10,8 @@ public class CalculatorExpressionCompiler {
     private StringNumber secondOperand;
     private StringExpression stringExpression;
     private Calculator calculator;
-    private boolean firstOperandInput;
     private char currentOperator;
+    private boolean operandsUpdated;
 
     public CalculatorExpressionCompiler(Calculator calculator) {
         this.calculator = calculator;
@@ -26,88 +26,45 @@ public class CalculatorExpressionCompiler {
             return valueAfterInputDot();
         }
         if ("+-*/√^=".contains(String.valueOf(inputSymbol))) {
+            if (!operandsUpdated) {
+                operandsUpdate();
+            }
             currentOperator = inputSymbol;
-            inputOperator();
+            return firstOperand.getNumberAsString();
         }
-        return stringExpression.getAnswerAsString();
+        return firstOperand.getNumberAsString();
     }
 
     private String valueAfterAddingDigit(char inputDigit) {
-        if (firstOperandInput) {
-            if (!firstOperand.isDotEntered()) {
-                firstOperand.addToIntegerPart(inputDigit);
-            } else {
-                firstOperand.addToFractionalPart(inputDigit);
-            }
-            return firstOperand.getNumberAsString();
+        operandsUpdated = false;
+        if (!secondOperand.isDotEntered()) {
+            secondOperand.addToIntegerPart(inputDigit);
         } else {
-            if (!secondOperand.isDotEntered()) {
-                secondOperand.addToIntegerPart(inputDigit);
-            } else {
-                secondOperand.addToFractionalPart(inputDigit);
-            }
-            return secondOperand.getNumberAsString();
+            secondOperand.addToFractionalPart(inputDigit);
         }
+        return secondOperand.getNumberAsString();
     }
 
     private String valueAfterInputDot() {
-        if (firstOperandInput) {
-            firstOperand.inputDot();
-            return firstOperand.getNumberAsString();
-        } else {
-            secondOperand.inputDot();
-            return secondOperand.getNumberAsString();
-        }
+        operandsUpdated = false;
+        secondOperand.inputDot();
+        return secondOperand.getNumberAsString();
     }
 
-    private void inputOperator() {
-        switch (currentOperator) {
-            case '+': {
-                fillExpression();
-                break;
-            }
-            case '-': {
-                fillExpression();
-                break;
-            }
-            case '*': {
-                fillExpression();
-                break;
-            }
-            case '/': {
-                fillExpression();
-                break;
-            }
-            case '√': {
-                fillExpression();
-                break;
-            }
-            case '^': {
-                fillExpression();
-                break;
-            }
-            case '=': {
-                fillExpression();
-                break;
-            }
-        }
-    }
-
-    private void fillExpression() {
+    private void operandsUpdate() {
+        operandsUpdated = true;
+        stringExpression.setFirstOperand(firstOperand);
+        stringExpression.setSecondOperand(secondOperand);
         stringExpression.setOperator(currentOperator);
-        if (firstOperandInput) {
-            stringExpression.setFirstOperand(firstOperand);
-        } else {
-            stringExpression.setSecondOperand(secondOperand);
-        }
-        firstOperandInput = false;
+        firstOperand.setValueByString(stringExpression.getAnswerAsString());
+        secondOperand = new StringNumber();
     }
 
     public void allClear() {
         firstOperand = new StringNumber();
         secondOperand = new StringNumber();
         stringExpression = new StringExpression(calculator);
-        firstOperandInput = true;
-        currentOperator = 0;
+        currentOperator = '+';
+        operandsUpdated = false;
     }
 }

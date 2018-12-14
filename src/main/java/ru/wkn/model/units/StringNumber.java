@@ -48,15 +48,19 @@ public class StringNumber {
         firstInput = false;
         String[] valueAsStringArray = newValue.split("\\.");
         integerPart = valueAsStringArray[0];
-        if (valueAsStringArray.length == 2) {
+        if (valueAsStringArray.length == 2 && !valueAsStringArray[1].equals("0")) {
             fractionalPart = valueAsStringArray[1];
             fractionalPartEntered = true;
             dotEntered = true;
+        } else {
+            fractionalPart = "";
+            fractionalPartEntered = false;
+            dotEntered = false;
         }
     }
 
     public String getNumberAsString() {
-        String numberAsString = integerPart.equals("") ? "0" : integerPart;
+        String numberAsString = integerPart;
         if (dotEntered && fractionalPartEntered) {
             numberAsString = numberAsString.concat(".").concat(fractionalPart);
         }
