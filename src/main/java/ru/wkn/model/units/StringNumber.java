@@ -5,7 +5,6 @@ public class StringNumber {
     private String integerPart;
     private String fractionalPart;
     private boolean firstInput;
-    private boolean isIntegerValue;
     private boolean dotEntered;
     private boolean fractionalPartEntered;
 
@@ -13,7 +12,6 @@ public class StringNumber {
         integerPart = "0";
         fractionalPart = "";
         firstInput = true;
-        isIntegerValue = true;
         dotEntered = false;
         fractionalPartEntered = false;
     }
@@ -34,7 +32,6 @@ public class StringNumber {
     public void addToFractionalPart(char digit) {
         fractionalPart = fractionalPart.concat(String.valueOf(digit));
         if (!fractionalPartEntered) {
-            isIntegerValue = false;
             fractionalPartEntered = true;
         }
     }
@@ -47,14 +44,6 @@ public class StringNumber {
         dotEntered = true;
     }
 
-    public boolean isFractionalPartEntered() {
-        return fractionalPartEntered;
-    }
-
-    public boolean isIntegerValue() {
-        return isIntegerValue;
-    }
-
     public void setValueByString(String newValue) {
         firstInput = false;
         String[] valueAsStringArray = newValue.split("\\.");
@@ -63,7 +52,6 @@ public class StringNumber {
             fractionalPart = valueAsStringArray[1];
             fractionalPartEntered = true;
             dotEntered = true;
-            isIntegerValue = false;
         }
     }
 
