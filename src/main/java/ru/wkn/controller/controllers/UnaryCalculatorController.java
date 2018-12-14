@@ -2,6 +2,7 @@ package ru.wkn.controller.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -87,6 +88,13 @@ public class UnaryCalculatorController implements Controller {
         stringButtonMap.put("=", buttonEqually);
     }
 
+    private void showErrorInformation(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.show();
+    }
+
     @FXML
     private void onActionTextField(ActionEvent actionEvent) {
         stringButtonMap.get(((Button) actionEvent.getSource()).getText()).fire();
@@ -155,37 +163,72 @@ public class UnaryCalculatorController implements Controller {
 
     @FXML
     private void onActionButtonPlus() {
-        textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('+'));
+        try {
+            textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('+'));
+        } catch (ArithmeticException e) {
+            showErrorInformation(e.getClass().getSimpleName(), e.getMessage());
+            onActionButtonAC();
+        }
     }
 
     @FXML
     private void onActionButtonMinus() {
-        textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('-'));
+        try {
+            textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('-'));
+        } catch (ArithmeticException e) {
+            showErrorInformation(e.getClass().getSimpleName(), e.getMessage());
+            onActionButtonAC();
+        }
     }
 
     @FXML
     private void onActionButtonMultiply() {
-        textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('*'));
+        try {
+            textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('*'));
+        } catch (ArithmeticException e) {
+            showErrorInformation(e.getClass().getSimpleName(), e.getMessage());
+            onActionButtonAC();
+        }
     }
 
     @FXML
     private void onActionButtonSqrt() {
-        textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('√'));
+        try {
+            textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('√'));
+        } catch (ArithmeticException e) {
+            showErrorInformation(e.getClass().getSimpleName(), e.getMessage());
+            onActionButtonAC();
+        }
     }
 
     @FXML
     private void onActionButtonDiv() {
-        textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('/'));
+        try {
+            textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('/'));
+        } catch (ArithmeticException e) {
+            showErrorInformation(e.getClass().getSimpleName(), e.getMessage());
+            onActionButtonAC();
+        }
     }
 
     @FXML
     private void onActionButtonPower() {
-        textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('^'));
+        try {
+            textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('^'));
+        } catch (ArithmeticException e) {
+            showErrorInformation(e.getClass().getSimpleName(), e.getMessage());
+            onActionButtonAC();
+        }
     }
 
     @FXML
     private void onActionButtonEqually() {
-        textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('='));
+        try {
+            textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('='));
+        } catch (ArithmeticException e) {
+            showErrorInformation(e.getClass().getSimpleName(), e.getMessage());
+            onActionButtonAC();
+        }
     }
 
     @FXML

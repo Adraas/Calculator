@@ -34,10 +34,16 @@ public class Calculator {
     }
 
     public double division(double dividend, double divisor) throws ArithmeticException {
+        if (divisor == 0) {
+            throw new ArithmeticException("Division by zero!");
+        }
         return round(dividend / divisor);
     }
 
     public double squareRoot(double value, double power) throws ArithmeticException {
+        if (value < 0 && power % 2 == 0) {
+            throw new ArithmeticException("Even root of negative number!");
+        }
         return round(Math.pow(value, 1 / power));
     }
 
