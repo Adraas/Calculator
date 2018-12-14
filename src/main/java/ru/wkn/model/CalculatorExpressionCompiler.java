@@ -36,48 +36,47 @@ public class CalculatorExpressionCompiler {
                 }
                 return secondOperand.getNumberAsString();
             }
-        } else {
-            if (inputSymbol == '.') {
-                if (firstOperandInput) {
-                    firstOperand.inputDot();
-                    return firstOperand.getNumberAsString();
-                }
-                if (!firstOperandInput) {
-                    secondOperand.inputDot();
-                    return secondOperand.getNumberAsString();
-                }
+        }
+        if (inputSymbol == '.') {
+            if (firstOperandInput) {
+                firstOperand.inputDot();
+                return firstOperand.getNumberAsString();
             }
-            if ("+-*/√^=".contains(String.valueOf(inputSymbol))) {
-                currentOperator = inputSymbol;
-                switch (inputSymbol) {
-                    case '+': {
-                        fillExpression();
-                        break;
-                    }
-                    case '-': {
-                        fillExpression();
-                        break;
-                    }
-                    case '*': {
-                        fillExpression();
-                        break;
-                    }
-                    case '/': {
-                        fillExpression();
-                        break;
-                    }
-                    case '√': {
-                        fillExpression();
-                        break;
-                    }
-                    case '^': {
-                        fillExpression();
-                        break;
-                    }
-                    case '=': {
-                        fillExpression();
-                        break;
-                    }
+            if (!firstOperandInput) {
+                secondOperand.inputDot();
+                return secondOperand.getNumberAsString();
+            }
+        }
+        if ("+-*/√^=".contains(String.valueOf(inputSymbol))) {
+            currentOperator = inputSymbol;
+            switch (inputSymbol) {
+                case '+': {
+                    fillExpression();
+                    break;
+                }
+                case '-': {
+                    fillExpression();
+                    break;
+                }
+                case '*': {
+                    fillExpression();
+                    break;
+                }
+                case '/': {
+                    fillExpression();
+                    break;
+                }
+                case '√': {
+                    fillExpression();
+                    break;
+                }
+                case '^': {
+                    fillExpression();
+                    break;
+                }
+                case '=': {
+                    fillExpression();
+                    break;
                 }
             }
         }
