@@ -73,6 +73,9 @@
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.0.2</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
@@ -92,7 +95,6 @@
                                     </includes>
                                 </resource>
                             </resources>
-                            <encoding>${project.build.sourceEncoding}</encoding>
                         </configuration>
                     </execution>
                 </executions>
