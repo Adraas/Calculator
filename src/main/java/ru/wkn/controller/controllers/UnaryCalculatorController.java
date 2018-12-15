@@ -10,8 +10,12 @@ import ru.wkn.controller.Controller;
 import ru.wkn.model.CalculatorExpressionCompiler;
 import ru.wkn.model.calculating.Calculator;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 public class UnaryCalculatorController implements Controller {
 
@@ -88,11 +92,23 @@ public class UnaryCalculatorController implements Controller {
         stringButtonMap.put("=", buttonEqually);
     }
 
-    private void showErrorInformation(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    private void showInformation(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(message);
         alert.show();
+    }
+
+    @FXML
+    private void onActionMenuItemAbout() {
+        Properties properties = new Properties();
+        Reader reader = new InputStreamReader(getClass().getResourceAsStream("/information/information.properties"));
+        try {
+            properties.load(reader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        showInformation(properties.getProperty("title"), properties.getProperty("message"), Alert.AlertType.INFORMATION);
     }
 
     @FXML
@@ -166,7 +182,7 @@ public class UnaryCalculatorController implements Controller {
         try {
             textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('+'));
         } catch (ArithmeticException e) {
-            showErrorInformation(e.getClass().getSimpleName(), e.getMessage());
+            showInformation(e.getClass().getSimpleName(), e.getMessage(), Alert.AlertType.ERROR);
             onActionButtonAC();
         }
     }
@@ -176,7 +192,7 @@ public class UnaryCalculatorController implements Controller {
         try {
             textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('-'));
         } catch (ArithmeticException e) {
-            showErrorInformation(e.getClass().getSimpleName(), e.getMessage());
+            showInformation(e.getClass().getSimpleName(), e.getMessage(), Alert.AlertType.ERROR);
             onActionButtonAC();
         }
     }
@@ -186,7 +202,7 @@ public class UnaryCalculatorController implements Controller {
         try {
             textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('*'));
         } catch (ArithmeticException e) {
-            showErrorInformation(e.getClass().getSimpleName(), e.getMessage());
+            showInformation(e.getClass().getSimpleName(), e.getMessage(), Alert.AlertType.ERROR);
             onActionButtonAC();
         }
     }
@@ -196,7 +212,7 @@ public class UnaryCalculatorController implements Controller {
         try {
             textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('√'));
         } catch (ArithmeticException e) {
-            showErrorInformation(e.getClass().getSimpleName(), e.getMessage());
+            showInformation(e.getClass().getSimpleName(), e.getMessage(), Alert.AlertType.ERROR);
             onActionButtonAC();
         }
     }
@@ -206,7 +222,7 @@ public class UnaryCalculatorController implements Controller {
         try {
             textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('/'));
         } catch (ArithmeticException e) {
-            showErrorInformation(e.getClass().getSimpleName(), e.getMessage());
+            showInformation(e.getClass().getSimpleName(), e.getMessage(), Alert.AlertType.ERROR);
             onActionButtonAC();
         }
     }
@@ -216,7 +232,7 @@ public class UnaryCalculatorController implements Controller {
         try {
             textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('^'));
         } catch (ArithmeticException e) {
-            showErrorInformation(e.getClass().getSimpleName(), e.getMessage());
+            showInformation(e.getClass().getSimpleName(), e.getMessage(), Alert.AlertType.ERROR);
             onActionButtonAC();
         }
     }
@@ -226,7 +242,7 @@ public class UnaryCalculatorController implements Controller {
         try {
             textFieldResult.setText(calculatorExpressionCompiler.getCurrentAnswerAsString('='));
         } catch (ArithmeticException e) {
-            showErrorInformation(e.getClass().getSimpleName(), e.getMessage());
+            showInformation(e.getClass().getSimpleName(), e.getMessage(), Alert.AlertType.ERROR);
             onActionButtonAC();
         }
     }
