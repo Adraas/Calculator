@@ -58,7 +58,9 @@ public class StringExpression {
                     break;
                 }
                 case '=': {
-                    operationAnswerAsString = this.firstOperand.getNumberAsString();
+                    operationAnswerAsString = String.valueOf(calculator
+                            .round(Double.parseDouble(this.secondOperand.getNumberAsString())));
+                    break;
                 }
             }
         }

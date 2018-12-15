@@ -51,7 +51,7 @@ public class Calculator {
         return round(Math.pow(value, degree));
     }
 
-    private double round(double value) {
+    public double round(double value) {
         int accuracyCoefficient = (int) Math.pow(10, roundingAccuracy);
         return (double) Math.round(value * accuracyCoefficient) / accuracyCoefficient;
     }
