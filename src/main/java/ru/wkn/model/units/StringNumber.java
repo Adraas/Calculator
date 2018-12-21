@@ -22,8 +22,10 @@ public class StringNumber {
 
     public void addToIntegerPart(char digit) {
         if (firstInput) {
-            integerPart = String.valueOf(digit);
-            firstInput = false;
+            if (digit != (int) '0') {
+                integerPart = String.valueOf(digit);
+                firstInput = false;
+            }
         } else {
             integerPart = integerPart.concat(String.valueOf(digit));
         }
