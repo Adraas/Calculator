@@ -1,11 +1,11 @@
 package ru.wkn.controller.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import ru.wkn.controller.Controller;
 import ru.wkn.model.CalculatorExpressionCompiler;
 import ru.wkn.model.calculating.Calculator;
@@ -73,23 +73,24 @@ public class UnaryCalculatorController implements Controller {
     }
 
     private void stringButtonMapInit() {
-        stringButtonMap.put("0", buttonValue0);
-        stringButtonMap.put("1", buttonValue1);
-        stringButtonMap.put("2", buttonValue2);
-        stringButtonMap.put("3", buttonValue3);
-        stringButtonMap.put("4", buttonValue4);
-        stringButtonMap.put("5", buttonValue5);
-        stringButtonMap.put("6", buttonValue6);
-        stringButtonMap.put("7", buttonValue7);
-        stringButtonMap.put("8", buttonValue8);
-        stringButtonMap.put("9", buttonValue9);
-        stringButtonMap.put(".", buttonDot);
-        stringButtonMap.put("+", buttonPlus);
-        stringButtonMap.put("-", buttonMinus);
-        stringButtonMap.put("*", buttonMultiply);
-        stringButtonMap.put("/", buttonDiv);
-        stringButtonMap.put("^", buttonPower);
-        stringButtonMap.put("=", buttonEqually);
+        stringButtonMap.put("NUMPAD0", buttonValue0);
+        stringButtonMap.put("NUMPAD1", buttonValue1);
+        stringButtonMap.put("NUMPAD2", buttonValue2);
+        stringButtonMap.put("NUMPAD3", buttonValue3);
+        stringButtonMap.put("NUMPAD4", buttonValue4);
+        stringButtonMap.put("NUMPAD5", buttonValue5);
+        stringButtonMap.put("NUMPAD6", buttonValue6);
+        stringButtonMap.put("NUMPAD7", buttonValue7);
+        stringButtonMap.put("NUMPAD8", buttonValue8);
+        stringButtonMap.put("NUMPAD9", buttonValue9);
+        stringButtonMap.put("DECIMAL", buttonDot);
+        stringButtonMap.put("ADD", buttonPlus);
+        stringButtonMap.put("SUBTRACT", buttonMinus);
+        stringButtonMap.put("MULTIPLY", buttonMultiply);
+        stringButtonMap.put("DIVIDE", buttonDiv);
+        stringButtonMap.put("DIGIT6", buttonPower);
+        stringButtonMap.put("ENTER", buttonEqually);
+        stringButtonMap.put("BACK_SPACE", buttonAC);
     }
 
     private void showInformation(String title, String message, Alert.AlertType alertType) {
@@ -109,11 +110,6 @@ public class UnaryCalculatorController implements Controller {
             e.printStackTrace();
         }
         showInformation(properties.getProperty("title"), properties.getProperty("message"), Alert.AlertType.INFORMATION);
-    }
-
-    @FXML
-    private void onActionTextField(ActionEvent actionEvent) {
-        stringButtonMap.get(((Button) actionEvent.getSource()).getText()).fire();
     }
 
     @FXML
@@ -250,5 +246,105 @@ public class UnaryCalculatorController implements Controller {
     @FXML
     private void onMouseClickedAccuracy() {
         calculator.setRoundingAccuracy((int) sliderAccuracy.getValue());
+    }
+
+    @FXML
+    private void onActionTextField(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionButton1(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionButton2(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionButton3(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionButton4(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionButton5(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionButton6(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionButton7(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionButton8(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionButton9(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionButton0(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionKeyDot(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionKeyPlus(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionKeyMinus(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionKeyMultiply(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionKeyDiv(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionKeySqrt(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionSliderAccuracy(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionKeyPower(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
+    }
+
+    @FXML
+    private void onActionKeyEqually(KeyEvent keyEvent) {
+        stringButtonMap.get(keyEvent.getCode().toString()).fire();
     }
 }
