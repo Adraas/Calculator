@@ -50,7 +50,7 @@ public class StringExpression {
                     break;
                 }
                 case '√': {
-                    operationAnswerAsString = String.valueOf(calculator.squareRoot(firstOperand, secondOperand));
+                    operationAnswerAsString = String.valueOf(calculator.root(firstOperand, secondOperand));
                     break;
                 }
                 case '^': {

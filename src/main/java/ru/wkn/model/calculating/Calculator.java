@@ -40,11 +40,12 @@ public class Calculator {
         return round(dividend / divisor);
     }
 
-    public double squareRoot(double value, double power) throws ArithmeticException {
+    public double root(double value, double power) throws ArithmeticException {
         if (value < 0 && power % 2 == 0) {
             throw new ArithmeticException("Even root of negative number!");
         }
-        return round(Math.pow(value, 1 / power));
+        int signum = (int) Math.signum(value);
+        return round(Math.pow(Math.abs(value), (double) 1 / power)) * signum;
     }
 
     public double power(double value, double degree) throws ArithmeticException {
